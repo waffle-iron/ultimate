@@ -124,7 +124,10 @@ public final class DirectNwaGameGraph<LETTER, STATE> extends DirectGameGraph<LET
 			performance.startTimeMeasure(ETimeMeasure.BUILD_RESULT);
 		}
 
-		final INestedWordAutomatonOldApi<LETTER, STATE> result = mGeneration.generateAutomatonFromGraph();
+//		final INestedWordAutomatonOldApi<LETTER, STATE> result = mGeneration.generateAutomatonFromGraph();
+		// TODO Enable the correct simulation again when DD problems are resolved
+		@SuppressWarnings("unchecked")
+		final INestedWordAutomatonOldApi<LETTER, STATE> result = (INestedWordAutomatonOldApi<LETTER, STATE>) mNwa;
 
 		// Log performance
 		if (performance != null) {
@@ -194,7 +197,7 @@ public final class DirectNwaGameGraph<LETTER, STATE> extends DirectGameGraph<LET
 	 */
 	@Override
 	public void verifyAutomatonValidity(final INestedWordAutomatonOldApi<LETTER, STATE> automaton) {
-		// Do noting to accept nwa automata
+		// Do nothing to accept nwa automata
 	}
 
 }

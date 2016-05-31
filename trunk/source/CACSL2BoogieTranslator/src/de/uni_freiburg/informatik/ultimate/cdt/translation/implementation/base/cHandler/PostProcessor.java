@@ -159,6 +159,16 @@ public class PostProcessor {
 		decl.addAll(createUltimateStartProcedure(main, loc, functionHandler));
 		decl.addAll(declareFunctionPointerProcedures(main, functionHandler, memoryHandler, structHandler));
 		decl.addAll(declareConversionFunctions(main, functionHandler, memoryHandler, structHandler));
+		
+		if (!(typeHandler).useIntForAllIntegerTypes()) {
+			decl.addAll(PostProcessor.declarePrimitiveDataTypeSynonyms(loc, main.getTypeSizes(),
+					typeHandler));
+
+			if ((typeHandler).areFloatingTypesNeeded()) {
+				decl.addAll(PostProcessor.declareFloatDataTypes(loc, main.getTypeSizes(), typeHandler));
+			}
+
+		}
 		return decl;
 	}
 	
@@ -600,6 +610,7 @@ public class PostProcessor {
 						indices[0] = 11;
 						indices[1] = 53;
 						break;
+					case 12: // because of 80bit long doubles on linux x86
 					case 16:
 						indices[0] = 15;
 						indices[1] = 113;
