@@ -96,7 +96,7 @@ terminal OLD;
 terminal FORALL, EXISTS;
 terminal BOOL, INT, REAL;
 terminal FALSE, TRUE;
-terminal ASSUME, ASSERT, HAVOC, ASYNC, CALL, IF, THEN, ELSE, WHILE, BREAK, RETURN, GOTO;
+terminal ASSUME, ASSERT, HAVOC, FORK, ASYNC, CALL, IF, THEN, ELSE, WHILE, BREAK, RETURN, GOTO;
 /* Other Symbols */
 terminal COMMA, COLON, SEMI, COLONEQUALS, EQUALS;
 terminal LPAR, RPAR, LBKT, RBKT, LBRC, RBRC, LANG, RANG;
@@ -175,6 +175,7 @@ non terminal LeftHandSide lhs;
 non terminal Statement[] blockStmt;
 non terminal Statement   ifStmt;
 non terminal Statement   callStmt;
+non terminal Statement   forkStmt;
 non terminal Statement[] elseOpt;
 non terminal List<LoopInvariantSpecification> loopInvStar;
 non terminal LoopInvariantSpecification loopInv;
@@ -717,6 +718,7 @@ stmt ::=
 	  {: RESULT = new GotoStatement(getLocation(x$,l$,false), l.toArray(new String[l.size()])); :}
 	| ASYNC callStmt:s 
 	  {: RESULT = s; :}
+	| forkStmt:s
 	| callStmt:s
 	;
 callStmt ::= 
@@ -726,6 +728,11 @@ callStmt ::=
 	  {: RESULT = new CallStatement(getLocation(x$,p$,false), false, ass.toArray(new VariableLHS[ass.size()]), m, p.toArray(new Expression[p.size()])); :}
 	| CALL:x FORALL:z ID:m LPAR wildcardExprCommaStar:e RPAR SEMI
 	  {: RESULT = new CallStatement(getLocation(x$,e$,false), true, new VariableLHS[0], m, e.toArray(new Expression[e.size()])); :}
+	  ;
+
+forkStmt ::= 
+      FORK:x ID:m exprCommaStar:e RPAR SEMI
+	  {: RESULT = new CallStatement(getLocation(x$,e$,false), false, new VariableLHS[0], m, e.toArray(new Expression[e.size()])); :}
 	;  
 ifStmt ::=
 	  IF:x LPAR wildcardExpr:c RPAR blockStmt:block elseOpt:e
