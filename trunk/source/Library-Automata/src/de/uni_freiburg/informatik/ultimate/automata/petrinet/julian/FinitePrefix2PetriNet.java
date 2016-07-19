@@ -174,7 +174,7 @@ public class FinitePrefix2PetriNet<L, C> implements IOperation<L, C> {
 		for (final Condition c : bp.getConditions()) {
 			assert representatives.find(c) != null;
 			if (c == representatives.find(c)) {
-				final Place<L, C> place = mNet.addPlace(old_net.getStateFactory()
+				final Place<L, C> place = mNet.addPlace((C) old_net.getStateFactory()
 						.finitePrefix2net(c), bp.initialConditions()
 						.contains(c), bp.isAccepting(c));
 				placeMap.put(c, place);
