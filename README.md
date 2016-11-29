@@ -1,4 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/ultimate-pa/ultimate.png?label=ready&title=Ready)](https://waffle.io/ultimate-pa/ultimate)
+[![Stories in Ready](https://badge.waffle.io/ultimate-pa/ultimate.png?label=ready&title=Ready)](https://waffle.io/ultimate-pa/ultimate)
 # Ultimate
 [![Build Status](https://travis-ci.org/ultimate-pa/ultimate.svg)](https://travis-ci.org/ultimate-pa/ultimate)
 [![Codacy Badge](https://api.codacy.com/project/badge/grade/b03e97ce2ee948eb974a211bbbfc6a2e)](https://www.codacy.com/app/ultimate-pa/ultimate)
